@@ -9,16 +9,15 @@ int same_characters3(const char *, const char *, const char *);
 
 int prio(char p);
 
-int string_comp(char *p);
+int string_comp(char *);
 
-int string_comp2(char *a, char *b, char *c);
+int string_comp2(char *, char *, char *);
 
 int main() {
   FILE *fp;
   char *line = NULL;
   char *line2 = NULL;
   char *line3 = NULL;
-  char read;
   size_t len = 0;
   long r = 0;
 
@@ -40,6 +39,9 @@ int main() {
   }
   printf("%ld\n", r);
   fclose(fp);
+  free(line);
+  free(line2);
+  free(line3);
   return 0;
 }
 
