@@ -21,28 +21,28 @@ func main() {
 
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
-        overlaps1 = overlaps1 + overlap(scanner.Text())
+        var line string = scanner.Text()
+        overlaps1 = overlaps1 + overlap(parse(line))
+        overlaps2 = overlaps2 + overlap2(parse(line))
     }
     fmt.Println(overlaps1)
-    file2, err := os.Open("input.txt")
-    scanner2 := bufio.NewScanner(file2)
-    for scanner2.Scan() {
-        overlaps2 = overlaps2 + overlap2(scanner2.Text())
-    }
     fmt.Println(overlaps2)
 }
 
-func overlap(x string) int{
+func parse(x string)(int, int, int, int){
     ranges := strings.Split(x, ",")
     nums1 := strings.Split(ranges[0],"-")
     nums2 := strings.Split(ranges[1],"-")
-
     lower1,err := strconv.Atoi(nums1[0])
     lower2,err := strconv.Atoi(nums2[0])
     upper1,err := strconv.Atoi(nums1[1])
     upper2,err := strconv.Atoi(nums2[1])
     if err != nil {print("error")
    }
+    return lower1,lower2,upper1,upper2
+}
+
+func overlap(lower1 int,lower2 int, upper1 int, upper2 int) int{
 
     if ((lower1 >= lower2 && upper1 <= upper2) || (lower1 <= lower2 && upper1 >= upper2)){
         return 1
@@ -51,18 +51,7 @@ func overlap(x string) int{
     }
 }
 
-func overlap2(x string) int{
-    ranges := strings.Split(x, ",")
-    nums1 := strings.Split(ranges[0],"-")
-    nums2 := strings.Split(ranges[1],"-")
-
-    lower1,err := strconv.Atoi(nums1[0])
-    lower2,err := strconv.Atoi(nums2[0])
-    upper1,err := strconv.Atoi(nums1[1])
-    upper2,err := strconv.Atoi(nums2[1])
-    if err != nil {print("error")
-   }
-   // print(lower1,upper1,lower2,upper2)
+func overlap2(lower1 int,lower2 int, upper1 int, upper2 int) int{
     if ((lower1 > upper2) || (lower2 > upper1)){
         return 0
     }else{
