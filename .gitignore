@@ -1,4 +1,6 @@
 input
-input.txt
+*.txt
 solution
 *.out
+target/
+*.lock
