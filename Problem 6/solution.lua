@@ -14,7 +14,6 @@ local function getTableSize(t)
     return count
 end
 
-
 local function unique(s)
     local a = {}
     local set = {}
@@ -22,27 +21,26 @@ local function unique(s)
         a[i] = s:sub(i, i)
     end
     for _, value in ipairs(a) do
-  set[value] = true
-end
---     print(getTableSize(set),#s)
+        set[value] = true
+    end
+    --     print(getTableSize(set),#s)
     return getTableSize(set) == #s
 end
 
-local function scan_first_unique(data,n)
+local function scan_first_unique(data, n)
     for i = 1, #data - n, 1 do
-        if unique(data:sub(i, i + n -1)) then
-            return i+n -1;
+        if unique(data:sub(i, i + n - 1)) then
+            return i + n - 1;
         else
---             print(data:sub(i, i + n))
+            --             print(data:sub(i, i + n))
         end
     end
 end
 
-
 local function main()
     local d = read_file('input.txt')
-    print(scan_first_unique(d,4))
-    print(scan_first_unique(d,14))
+    print(scan_first_unique(d, 4))
+    print(scan_first_unique(d, 14))
 end
 
 main()
